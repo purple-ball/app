@@ -17,7 +17,7 @@ App({
     // 初始化云开发环境
     if (wx.cloud) {
       wx.cloud.init({
-        env: 'your-env-id',
+        env: 'dev-9gxoatk043188a10',
         traceUser: true
       })
     }

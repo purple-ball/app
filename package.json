@@ -1,0 +1,11 @@
+{
+  "name": "herspace",
+  "version": "1.0.0",
+  "description": "女性健康关怀平台",
+  "scripts": {
+    "convert-icons": "node convert-icons.js"
+  },
+  "dependencies": {
+    "sharp": "^0.32.6"
+  }
+} 

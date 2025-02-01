@@ -1,0 +1,198 @@
+/* 日历样式 */
+.cycle-overview {
+  margin-bottom: 30rpx;
+}
+
+.calendar-header {
+  margin-bottom: 20rpx;
+}
+
+.month-selector {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 40rpx;
+}
+
+.current-month {
+  font-size: 32rpx;
+  font-weight: bold;
+}
+
+.arrow {
+  color: var(--text-color-light);
+  padding: 10rpx;
+}
+
+.calendar {
+  width: 100%;
+}
+
+.weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  text-align: center;
+  color: var(--text-color-light);
+  margin-bottom: 20rpx;
+}
+
+.days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 10rpx;
+}
+
+.day {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80rpx;
+  border-radius: 50%;
+}
+
+.day.today {
+  background-color: var(--background-color);
+}
+
+.day.period {
+  color: #fff;
+  background-color: var(--primary-color);
+}
+
+.day.selected {
+  border: 2rpx solid var(--primary-color);
+}
+
+.dot {
+  position: absolute;
+  bottom: 8rpx;
+  width: 8rpx;
+  height: 8rpx;
+  border-radius: 50%;
+  background-color: var(--primary-color);
+}
+
+/* 记录表单样式 */
+.record-header {
+  margin-bottom: 30rpx;
+}
+
+.form-item {
+  margin-bottom: 40rpx;
+}
+
+.form-label {
+  display: block;
+  margin-bottom: 20rpx;
+  color: var(--text-color-light);
+}
+
+/* 经期强度选择器 */
+.intensity-selector {
+  display: flex;
+  gap: 20rpx;
+}
+
+.intensity-option {
+  flex: 1;
+  text-align: center;
+  padding: 20rpx;
+  border-radius: 8rpx;
+  border: 2rpx solid var(--border-color);
+}
+
+.intensity-option.selected {
+  background-color: var(--primary-color);
+  color: #fff;
+  border-color: var(--primary-color);
+}
+
+/* 症状标签 */
+.symptom-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20rpx;
+}
+
+.symptom-tag {
+  padding: 16rpx 30rpx;
+  border-radius: 30rpx;
+  background-color: var(--background-color);
+  font-size: 26rpx;
+}
+
+.symptom-tag.selected {
+  background-color: var(--primary-color);
+  color: #fff;
+}
+
+/* 情绪选择器 */
+.mood-selector {
+  display: flex;
+  justify-content: space-between;
+  gap: 20rpx;
+}
+
+.mood-option {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10rpx;
+}
+
+.mood-icon {
+  width: 60rpx;
+  height: 60rpx;
+}
+
+.mood-option.selected {
+  color: var(--primary-color);
+}
+
+/* 备注输入框 */
+.note-input {
+  width: 100%;
+  height: 160rpx;
+  padding: 20rpx;
+  border: 2rpx solid var(--border-color);
+  border-radius: 8rpx;
+  box-sizing: border-box;
+}
+
+/* 保存按钮 */
+.save-btn {
+  margin-top: 40rpx;
+  width: 100%;
+}
+
+/* 周期分析 */
+.cycle-analysis {
+  margin-top: 30rpx;
+}
+
+.analysis-items {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20rpx;
+  margin-top: 20rpx;
+}
+
+.analysis-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.analysis-item .label {
+  color: var(--text-color-light);
+  font-size: 26rpx;
+  margin-bottom: 10rpx;
+}
+
+.analysis-item .value {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: var(--primary-color);
+} 

@@ -1,0 +1,119 @@
+<view class="container">
+  <!-- 周期概览 -->
+  <view class="cycle-overview card">
+    <view class="calendar-header">
+      <view class="month-selector">
+        <text class="arrow" bindtap="prevMonth">◀</text>
+        <text class="current-month">{{year}}年{{month}}月</text>
+        <text class="arrow" bindtap="nextMonth">▶</text>
+      </view>
+    </view>
+    <view class="calendar">
+      <view class="weekdays">
+        <text wx:for="{{['日','一','二','三','四','五','六']}}" wx:key="*this">{{item}}</text>
+      </view>
+      <view class="days">
+        <view 
+          wx:for="{{days}}" 
+          wx:key="date" 
+          class="day {{item.isToday ? 'today' : ''}} {{item.hasPeriod ? 'period' : ''}} {{item.isSelected ? 'selected' : ''}}"
+          bindtap="selectDate"
+          data-date="{{item.date}}"
+        >
+          <text>{{item.day}}</text>
+          <view class="dot" wx:if="{{item.hasPeriod}}"></view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 周期记录 -->
+  <view class="cycle-record card" wx:if="{{selectedDate}}">
+    <view class="record-header">
+      <text class="title">{{selectedDate}} 记录</text>
+    </view>
+    <view class="record-form">
+      <!-- 经期强度 -->
+      <view class="form-item">
+        <text class="form-label">经期强度</text>
+        <view class="intensity-selector">
+          <view 
+            wx:for="{{['轻','中','重']}}" 
+            wx:key="*this"
+            class="intensity-option {{selectedIntensity === index ? 'selected' : ''}}"
+            bindtap="selectIntensity"
+            data-intensity="{{index}}"
+          >
+            {{item}}
+          </view>
+        </view>
+      </view>
+
+      <!-- 身体状况 -->
+      <view class="form-item">
+        <text class="form-label">身体状况</text>
+        <view class="symptom-tags">
+          <view 
+            wx:for="{{symptoms}}" 
+            wx:key="name"
+            class="symptom-tag {{item.selected ? 'selected' : ''}}"
+            bindtap="toggleSymptom"
+            data-name="{{item.name}}"
+          >
+            {{item.name}}
+          </view>
+        </view>
+      </view>
+
+      <!-- 情绪状态 -->
+      <view class="form-item">
+        <text class="form-label">情绪状态</text>
+        <view class="mood-selector">
+          <view 
+            wx:for="{{moods}}" 
+            wx:key="name"
+            class="mood-option {{selectedMood === item.name ? 'selected' : ''}}"
+            bindtap="selectMood"
+            data-mood="{{item.name}}"
+          >
+            <image class="mood-icon" src="{{item.icon}}"></image>
+            <text>{{item.name}}</text>
+          </view>
+        </view>
+      </view>
+
+      <!-- 备注 -->
+      <view class="form-item">
+        <text class="form-label">备注</text>
+        <textarea 
+          class="note-input"
+          placeholder="记录一下特殊情况..."
+          value="{{note}}"
+          bindinput="updateNote"
+        ></textarea>
+      </view>
+    </view>
+
+    <!-- 保存按钮 -->
+    <button class="btn save-btn" bindtap="saveRecord">保存记录</button>
+  </view>
+
+  <!-- 周期分析 -->
+  <view class="cycle-analysis card">
+    <view class="title">周期分析</view>
+    <view class="analysis-items">
+      <view class="analysis-item">
+        <text class="label">平均周期</text>
+        <text class="value">{{averageCycle || '--'}} 天</text>
+      </view>
+      <view class="analysis-item">
+        <text class="label">平均经期</text>
+        <text class="value">{{averagePeriod || '--'}} 天</text>
+      </view>
+      <view class="analysis-item">
+        <text class="label">下次预测</text>
+        <text class="value">{{nextPeriod || '--'}}</text>
+      </view>
+    </view>
+  </view>
+</view> 

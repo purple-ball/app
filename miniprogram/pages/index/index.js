@@ -54,6 +54,11 @@ Page({
 
   // 获取周期数据
   getCycleData: function () {
+    if (!wx.cloud) {
+      console.error('请使用 2.2.3 或以上的基础库以使用云能力')
+      return
+    }
+    
     const db = wx.cloud.database()
     db.collection('cycles')
       .orderBy('date', 'desc')
@@ -67,6 +72,11 @@ Page({
       })
       .catch(err => {
         console.error('获取周期数据失败：', err)
+        // 显示错误提示
+        wx.showToast({
+          title: '数据加载失败',
+          icon: 'none'
+        })
       })
   },
 
@@ -96,6 +106,11 @@ Page({
 
   // 获取社区动态
   getCommunityPosts: function () {
+    if (!wx.cloud) {
+      console.error('请使用 2.2.3 或以上的基础库以使用云能力')
+      return
+    }
+
     const db = wx.cloud.database()
     db.collection('posts')
       .orderBy('createTime', 'desc')
@@ -108,6 +123,11 @@ Page({
       })
       .catch(err => {
         console.error('获取社区动态失败：', err)
+        // 显示错误提示
+        wx.showToast({
+          title: '社区数据加载失败',
+          icon: 'none'
+        })
       })
   },
 
