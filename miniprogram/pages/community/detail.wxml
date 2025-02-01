@@ -1,0 +1,94 @@
+<view class="container">
+  <!-- 帖子内容 -->
+  <view class="post-content card">
+    <view class="post-header">
+      <image class="avatar" src="{{post.author.avatarUrl || '/images/default-avatar.png'}}" mode="aspectFill"></image>
+      <view class="user-info">
+        <text class="nickname">{{post.author.nickName || '匿名用户'}}</text>
+        <text class="time">{{post.createTime}}</text>
+      </view>
+      <view class="category-tag">{{post.category}}</view>
+    </view>
+
+    <view class="post-body">
+      <text class="title" wx:if="{{post.title}}">{{post.title}}</text>
+      <text class="content">{{post.content}}</text>
+      <view class="image-list" wx:if="{{post.images && post.images.length > 0}}">
+        <image 
+          wx:for="{{post.images}}" 
+          wx:key="*this"
+          src="{{item}}"
+          mode="aspectFill"
+          class="post-image"
+          bindtap="previewImage"
+          data-urls="{{post.images}}"
+          data-current="{{item}}"
+        ></image>
+      </view>
+    </view>
+
+    <view class="post-footer">
+      <view class="action-item" bindtap="toggleLike">
+        <image class="icon" src="/images/icons/like{{isLiked ? '_filled' : ''}}.png"></image>
+        <text>{{post.likeCount || 0}}</text>
+      </view>
+      <view class="action-item">
+        <image class="icon" src="/images/icons/comment.png"></image>
+        <text>{{post.commentCount || 0}}</text>
+      </view>
+      <button class="action-item share-btn" open-type="share">
+        <image class="icon" src="/images/icons/share.png"></image>
+        <text>分享</text>
+      </button>
+    </view>
+  </view>
+
+  <!-- 评论列表 -->
+  <view class="comments card">
+    <view class="section-title">评论 {{post.commentCount || 0}}</view>
+    <view class="comment-list">
+      <block wx:if="{{comments.length > 0}}">
+        <view class="comment-item" wx:for="{{comments}}" wx:key="_id">
+          <image class="avatar" src="{{item.author.avatarUrl || '/images/default-avatar.png'}}" mode="aspectFill"></image>
+          <view class="comment-content">
+            <view class="comment-header">
+              <text class="nickname">{{item.author.nickName || '匿名用户'}}</text>
+              <text class="time">{{item.createTime}}</text>
+            </view>
+            <text class="text">{{item.content}}</text>
+            <view class="reply-list" wx:if="{{item.replies && item.replies.length > 0}}">
+              <view class="reply-item" wx:for="{{item.replies}}" wx:key="_id" wx:for-item="reply">
+                <text class="nickname">{{reply.author.nickName || '匿名用户'}}</text>
+                <text class="text">{{reply.content}}</text>
+              </view>
+            </view>
+            <view class="comment-actions">
+              <text class="action" bindtap="showReplyInput" data-id="{{item._id}}">回复</text>
+              <text class="action" bindtap="likeComment" data-id="{{item._id}}">
+                {{item.isLiked ? '已赞' : '赞'}} {{item.likeCount || ''}}
+              </text>
+            </view>
+          </view>
+        </view>
+      </block>
+      <view class="no-comment" wx:else>
+        <text>暂无评论，快来抢沙发吧~</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 评论输入框 -->
+  <view class="comment-input-wrapper {{isIphoneX ? 'iphonex-bottom' : ''}}">
+    <view class="comment-input">
+      <input 
+        class="input" 
+        placeholder="{{replyTo ? '回复 ' + replyTo.author.nickName : '说点什么...'}}"
+        value="{{commentContent}}"
+        focus="{{showCommentInput}}"
+        bindinput="updateCommentContent"
+        bindblur="hideCommentInput"
+      />
+      <view class="send-btn {{commentContent ? 'active' : ''}}" bindtap="submitComment">发送</view>
+    </view>
+  </view>
+</view> 

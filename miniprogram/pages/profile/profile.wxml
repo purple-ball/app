@@ -1,2 +1,123 @@
 <!--pages/profile/profile.wxml-->
-<text>pages/profile/profile.wxml</text>
+<view class="container">
+  <!-- 用户信息卡片 -->
+  <view class="user-card">
+    <view class="user-info">
+      <image class="avatar" src="{{userInfo.avatarUrl || '/images/default-avatar.png'}}" mode="aspectFill"></image>
+      <view class="info-content">
+        <text class="nickname">{{userInfo.nickName || '未登录'}}</text>
+        <text class="id" wx:if="{{userInfo}}">ID: {{userInfo._openid}}</text>
+      </view>
+    </view>
+    <button class="login-btn" wx:if="{{!userInfo}}" bindtap="login">点击登录</button>
+  </view>
+
+  <!-- 数据统计 -->
+  <view class="stats card">
+    <view class="stat-item">
+      <text class="number">{{stats.postCount || 0}}</text>
+      <text class="label">发帖</text>
+    </view>
+    <view class="stat-item">
+      <text class="number">{{stats.commentCount || 0}}</text>
+      <text class="label">评论</text>
+    </view>
+    <view class="stat-item">
+      <text class="number">{{stats.likeCount || 0}}</text>
+      <text class="label">获赞</text>
+    </view>
+  </view>
+
+  <!-- 内容列表 -->
+  <view class="content-list">
+    <!-- 选项卡 -->
+    <view class="tabs">
+      <view 
+        class="tab {{activeTab === 'posts' ? 'active' : ''}}" 
+        bindtap="switchTab" 
+        data-tab="posts"
+      >我的发帖</view>
+      <view 
+        class="tab {{activeTab === 'comments' ? 'active' : ''}}" 
+        bindtap="switchTab" 
+        data-tab="comments"
+      >我的评论</view>
+      <view 
+        class="tab {{activeTab === 'likes' ? 'active' : ''}}" 
+        bindtap="switchTab" 
+        data-tab="likes"
+      >我的点赞</view>
+    </view>
+
+    <!-- 帖子列表 -->
+    <view class="list-content" wx:if="{{activeTab === 'posts'}}">
+      <view class="post-item card" wx:for="{{posts}}" wx:key="_id" bindtap="goToDetail" data-id="{{item._id}}">
+        <view class="post-header">
+          <text class="category-tag">{{item.category}}</text>
+          <text class="time">{{item.createTime}}</text>
+        </view>
+        <view class="post-body">
+          <text class="title" wx:if="{{item.title}}">{{item.title}}</text>
+          <text class="content">{{item.content}}</text>
+          <view class="image-preview" wx:if="{{item.images.length > 0}}">
+            <image src="{{item.images[0]}}" mode="aspectFill"></image>
+            <view class="image-count" wx:if="{{item.images.length > 1}}">+{{item.images.length - 1}}</view>
+          </view>
+        </view>
+        <view class="post-footer">
+          <view class="action-item">
+            <image class="icon" src="/images/icons/like_filled.png"></image>
+            <text>{{item.likeCount || 0}}</text>
+          </view>
+          <view class="action-item">
+            <image class="icon" src="/images/icons/comment.png"></image>
+            <text>{{item.commentCount || 0}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 评论列表 -->
+    <view class="list-content" wx:if="{{activeTab === 'comments'}}">
+      <view class="comment-item card" wx:for="{{comments}}" wx:key="_id" bindtap="goToDetail" data-id="{{item.postId}}">
+        <view class="comment-header">
+          <text class="time">{{item.createTime}}</text>
+        </view>
+        <view class="comment-body">
+          <text class="content">{{item.content}}</text>
+          <view class="origin-post">
+            <text class="label">回复：</text>
+            <text class="post-content">{{item.post.content}}</text>
+          </view>
+        </view>
+        <view class="comment-footer">
+          <view class="action-item">
+            <image class="icon" src="/images/icons/like_filled.png"></image>
+            <text>{{item.likeCount || 0}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 点赞列表 -->
+    <view class="list-content" wx:if="{{activeTab === 'likes'}}">
+      <view class="like-item card" wx:for="{{likes}}" wx:key="_id" bindtap="goToDetail" data-id="{{item.targetId}}">
+        <view class="like-header">
+          <text class="type-tag">{{item.targetType === 'post' ? '帖子' : '评论'}}</text>
+          <text class="time">{{item.createTime}}</text>
+        </view>
+        <view class="like-body">
+          <text class="content">{{item.target.content}}</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 加载更多 -->
+    <view class="loading-more" wx:if="{{isLoading}}">
+      <text>加载中...</text>
+    </view>
+    <view class="no-more" wx:if="{{noMore}}">
+      <text>没有更多内容了</text>
+    </view>
+  </view>
+</view>
