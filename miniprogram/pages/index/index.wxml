@@ -1,0 +1,104 @@
+<view class="container">
+  <!-- 头部用户信息 -->
+  <view class="header card">
+    <view class="user-info flex-between">
+      <view class="flex">
+        <image class="avatar" src="{{userInfo.avatarUrl || '/images/default-avatar.png'}}" mode="aspectFill"></image>
+        <view class="user-text">
+          <text class="nickname">{{userInfo.nickName || '亲爱的姐妹'}}</text>
+          <text class="welcome">欢迎来到HerSpace</text>
+        </view>
+      </view>
+      <view class="cycle-status" wx:if="{{cycleData}}">
+        <text>{{cycleData.currentPhase}}</text>
+        <text class="day-count">第{{cycleData.dayCount}}天</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 快捷功能区 -->
+  <view class="quick-actions card">
+    <view class="title">快捷功能</view>
+    <view class="grid">
+      <view class="grid-item" bindtap="navigateTo" data-url="/pages/cycle/record">
+        <image class="grid-icon" src="/images/icons/record.png"></image>
+        <text>记录周期</text>
+      </view>
+      <view class="grid-item" bindtap="navigateTo" data-url="/pages/emotion/diary">
+        <image class="grid-icon" src="/images/icons/diary.png"></image>
+        <text>情绪日记</text>
+      </view>
+      <view class="grid-item" bindtap="navigateTo" data-url="/pages/knowledge/index">
+        <image class="grid-icon" src="/images/icons/knowledge.png"></image>
+        <text>健康知识</text>
+      </view>
+      <view class="grid-item" bindtap="navigateTo" data-url="/pages/sos/index">
+        <image class="grid-icon" src="/images/icons/sos.png"></image>
+        <text>紧急求助</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 每日任务 -->
+  <view class="daily-tasks card">
+    <view class="flex-between">
+      <view class="title">今日任务</view>
+      <text class="more" bindtap="navigateTo" data-url="/pages/tasks/list">查看全部</text>
+    </view>
+    <view class="task-list">
+      <view class="task-item flex-between" wx:for="{{tasks}}" wx:key="id">
+        <view class="flex">
+          <checkbox checked="{{item.completed}}" bindtap="toggleTask" data-id="{{item.id}}"></checkbox>
+          <text class="task-text {{item.completed ? 'completed' : ''}}">{{item.text}}</text>
+        </view>
+        <text class="task-points">+{{item.points}}分</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 健康提醒 -->
+  <view class="health-reminder card" wx:if="{{reminder}}">
+    <view class="reminder-header flex-between">
+      <view class="flex">
+        <image class="reminder-icon" src="/images/icons/reminder.png"></image>
+        <text class="reminder-title">健康提醒</text>
+      </view>
+      <text class="reminder-time">{{reminder.time}}</text>
+    </view>
+    <text class="reminder-content">{{reminder.content}}</text>
+    <view class="reminder-actions flex-between">
+      <button class="btn-outline" bindtap="dismissReminder">稍后提醒</button>
+      <button class="btn" bindtap="handleReminder">立即处理</button>
+    </view>
+  </view>
+
+  <!-- 社区动态 -->
+  <view class="community-updates card">
+    <view class="flex-between">
+      <view class="title">社区动态</view>
+      <text class="more" bindtap="navigateTo" data-url="/pages/community/index">更多</text>
+    </view>
+    <view class="post-list">
+      <view class="post-item" wx:for="{{posts}}" wx:key="id" bindtap="navigateTo" data-url="/pages/community/post?id={{item.id}}">
+        <view class="post-header flex">
+          <image class="post-avatar" src="{{item.author.avatarUrl}}" mode="aspectFill"></image>
+          <view class="post-info">
+            <text class="post-author">{{item.author.nickName}}</text>
+            <text class="post-time">{{item.createTime}}</text>
+          </view>
+        </view>
+        <text class="post-content">{{item.content}}</text>
+        <view class="post-stats flex">
+          <view class="stat-item">
+            <image class="stat-icon" src="/images/icons/like.png"></image>
+            <text>{{item.likeCount}}</text>
+          </view>
+          <view class="stat-item">
+            <image class="stat-icon" src="/images/icons/comment.png"></image>
+            <text>{{item.commentCount}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view> 

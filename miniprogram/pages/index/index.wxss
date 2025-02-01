@@ -1,0 +1,173 @@
+/* 头部用户信息 */
+.header {
+  margin-bottom: 30rpx;
+}
+
+.avatar {
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 50%;
+  margin-right: 20rpx;
+}
+
+.user-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.nickname {
+  font-size: 32rpx;
+  font-weight: bold;
+  margin-bottom: 6rpx;
+}
+
+.welcome {
+  font-size: 26rpx;
+  color: var(--text-color-light);
+}
+
+.cycle-status {
+  text-align: right;
+}
+
+.day-count {
+  display: block;
+  font-size: 24rpx;
+  color: var(--text-color-light);
+  margin-top: 6rpx;
+}
+
+/* 快捷功能区 */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20rpx;
+  margin-top: 20rpx;
+}
+
+.grid-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20rpx;
+}
+
+.grid-icon {
+  width: 80rpx;
+  height: 80rpx;
+  margin-bottom: 10rpx;
+}
+
+/* 每日任务 */
+.task-list {
+  margin-top: 20rpx;
+}
+
+.task-item {
+  padding: 20rpx 0;
+  border-bottom: 2rpx solid var(--border-color);
+}
+
+.task-item:last-child {
+  border-bottom: none;
+}
+
+.task-text {
+  margin-left: 20rpx;
+}
+
+.task-text.completed {
+  color: var(--text-color-light);
+  text-decoration: line-through;
+}
+
+.task-points {
+  color: var(--primary-color);
+  font-weight: bold;
+}
+
+/* 健康提醒 */
+.reminder-icon {
+  width: 40rpx;
+  height: 40rpx;
+  margin-right: 10rpx;
+}
+
+.reminder-title {
+  font-weight: bold;
+}
+
+.reminder-content {
+  display: block;
+  margin: 20rpx 0;
+  color: var(--text-color-light);
+}
+
+.reminder-actions {
+  margin-top: 20rpx;
+}
+
+/* 社区动态 */
+.post-list {
+  margin-top: 20rpx;
+}
+
+.post-item {
+  padding: 20rpx 0;
+  border-bottom: 2rpx solid var(--border-color);
+}
+
+.post-item:last-child {
+  border-bottom: none;
+}
+
+.post-avatar {
+  width: 60rpx;
+  height: 60rpx;
+  border-radius: 50%;
+  margin-right: 16rpx;
+}
+
+.post-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.post-author {
+  font-size: 28rpx;
+  font-weight: bold;
+}
+
+.post-time {
+  font-size: 24rpx;
+  color: var(--text-color-light);
+}
+
+.post-content {
+  display: block;
+  margin: 16rpx 0;
+  color: var(--text-color);
+}
+
+.post-stats {
+  gap: 30rpx;
+}
+
+.stat-item {
+  display: flex;
+  align-items: center;
+  color: var(--text-color-light);
+}
+
+.stat-icon {
+  width: 32rpx;
+  height: 32rpx;
+  margin-right: 8rpx;
+}
+
+/* 通用样式 */
+.more {
+  color: var(--text-color-light);
+  font-size: 26rpx;
+} 
