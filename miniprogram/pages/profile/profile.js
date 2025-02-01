@@ -18,7 +18,8 @@ Page({
     comments: [],
     likes: [],
     isLoading: false,
-    noMore: false
+    noMore: false,
+    unreadCount: 0 // 未读消息数
   },
 
   /**
@@ -30,6 +31,7 @@ Page({
       this.setData({ userInfo: app.globalData.userInfo })
       this.loadUserStats()
       this.loadContent()
+      this.checkUnreadNotifications()
     }
   },
 
@@ -47,6 +49,7 @@ Page({
     if (this.data.userInfo) {
       this.loadUserStats()
       this.loadContent()
+      this.checkUnreadNotifications()
     }
   },
 
@@ -315,5 +318,72 @@ Page({
     } else {
       return `${date.getMonth() + 1}月${date.getDate()}日`
     }
-  }
+  },
+
+  // 检查未读消息
+  checkUnreadNotifications: function() {
+    if (!this.data.userInfo) return
+    
+    const db = wx.cloud.database()
+    db.collection('notifications')
+      .where({
+        receiverId: app.globalData.openid,
+        isRead: false
+      })
+      .count()
+      .then(res => {
+        this.setData({
+          unreadCount: res.total
+        })
+      })
+  },
+
+  // 跳转到编辑资料页面
+  goToEditProfile: function() {
+    if (!this.data.userInfo) {
+      wx.showToast({
+        title: '请先登录',
+        icon: 'none'
+      })
+      return
+    }
+    wx.navigateTo({
+      url: '/pages/profile/editProfile'
+    })
+  },
+
+  // 跳转到消息通知页面
+  goToNotifications: function() {
+    if (!this.data.userInfo) {
+      wx.showToast({
+        title: '请先登录',
+        icon: 'none'
+      })
+      return
+    }
+    wx.navigateTo({
+      url: '/pages/profile/notifications'
+    })
+  },
+
+  // 跳转到我的收藏页面
+  goToFavorites: function() {
+    if (!this.data.userInfo) {
+      wx.showToast({
+        title: '请先登录',
+        icon: 'none'
+      })
+      return
+    }
+    wx.navigateTo({
+      url: '/pages/profile/favorites'
+    })
+  },
+
+  // 跳转到设置页面
+  goToSettings: function() {
+    wx.navigateTo({
+      url: '/pages/profile/settings'
+    })
+  },
 })

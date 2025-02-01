@@ -241,4 +241,64 @@
   text-align: center;
   padding: 30rpx;
   color: var(--text-color-light);
+}
+
+/* 功能入口 */
+.feature-list {
+  margin-bottom: 30rpx;
+}
+
+.feature-group {
+  margin-bottom: 20rpx;
+}
+
+.feature-group:last-child {
+  margin-bottom: 0;
+}
+
+.feature-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 30rpx;
+  border-bottom: 2rpx solid var(--border-color);
+}
+
+.feature-item:last-child {
+  border-bottom: none;
+}
+
+.feature-info {
+  display: flex;
+  align-items: center;
+}
+
+.feature-icon {
+  width: 40rpx;
+  height: 40rpx;
+  margin-right: 20rpx;
+}
+
+.feature-name {
+  font-size: 28rpx;
+  color: var(--text-color);
+}
+
+.arrow-icon {
+  width: 32rpx;
+  height: 32rpx;
+  opacity: 0.3;
+}
+
+.badge {
+  min-width: 32rpx;
+  height: 32rpx;
+  padding: 0 8rpx;
+  background: var(--primary-color);
+  border-radius: 16rpx;
+  color: #fff;
+  font-size: 20rpx;
+  line-height: 32rpx;
+  text-align: center;
+  margin-left: 12rpx;
 } 

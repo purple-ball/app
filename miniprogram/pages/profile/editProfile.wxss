@@ -1,0 +1,130 @@
+/* pages/profile/editProfile.wxss */
+.container {
+  padding: 30rpx;
+}
+
+.card {
+  margin-bottom: 30rpx;
+  padding: 30rpx;
+  background: #fff;
+  border-radius: 16rpx;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.05);
+}
+
+.section-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  margin-bottom: 30rpx;
+  display: block;
+}
+
+/* 头像编辑 */
+.avatar-section {
+  text-align: center;
+}
+
+.avatar-wrapper {
+  position: relative;
+  width: 160rpx;
+  height: 160rpx;
+  margin: 0 auto;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.avatar {
+  width: 100%;
+  height: 100%;
+}
+
+.edit-mask {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 60rpx;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.edit-icon {
+  width: 32rpx;
+  height: 32rpx;
+}
+
+/* 基本信息编辑 */
+.form-item {
+  display: flex;
+  align-items: center;
+  padding: 20rpx 0;
+  border-bottom: 2rpx solid var(--border-color);
+}
+
+.form-item:last-child {
+  border-bottom: none;
+}
+
+.label {
+  width: 160rpx;
+  font-size: 28rpx;
+  color: var(--text-color);
+}
+
+.input {
+  flex: 1;
+  font-size: 28rpx;
+  color: var(--text-color);
+}
+
+.picker {
+  flex: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 28rpx;
+  color: var(--text-color);
+}
+
+.arrow-icon {
+  width: 32rpx;
+  height: 32rpx;
+  opacity: 0.3;
+}
+
+/* 个人简介编辑 */
+.bio-input {
+  width: 100%;
+  height: 200rpx;
+  padding: 20rpx;
+  box-sizing: border-box;
+  font-size: 28rpx;
+  color: var(--text-color);
+  background: var(--background-color);
+  border-radius: 8rpx;
+  margin-bottom: 16rpx;
+}
+
+.word-count {
+  text-align: right;
+  font-size: 24rpx;
+  color: var(--text-color-light);
+}
+
+/* 保存按钮 */
+.btn-wrapper {
+  margin-top: 60rpx;
+  padding: 0 30rpx;
+}
+
+.save-btn {
+  width: 100%;
+  height: 88rpx;
+  line-height: 88rpx;
+  text-align: center;
+  background: var(--primary-color);
+  color: #fff;
+  border-radius: 44rpx;
+  font-size: 32rpx;
+} 

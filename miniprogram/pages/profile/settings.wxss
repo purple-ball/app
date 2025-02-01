@@ -1,0 +1,116 @@
+/* pages/profile/settings.wxss */
+.container {
+  padding: 30rpx;
+}
+
+.section {
+  margin-bottom: 30rpx;
+}
+
+.section-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  margin-bottom: 20rpx;
+  padding: 0 30rpx;
+}
+
+.setting-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 30rpx;
+  border-bottom: 2rpx solid var(--border-color);
+}
+
+.setting-item:last-child {
+  border-bottom: none;
+}
+
+.setting-name {
+  font-size: 28rpx;
+  color: var(--text-color);
+}
+
+/* 主题色选择 */
+.theme-colors {
+  display: flex;
+  gap: 20rpx;
+}
+
+.color-item {
+  width: 40rpx;
+  height: 40rpx;
+  border-radius: 50%;
+  border: 4rpx solid transparent;
+}
+
+.color-item.active {
+  border-color: var(--primary-color);
+  transform: scale(1.1);
+}
+
+/* 存储空间 */
+.storage-info {
+  padding: 0 30rpx;
+  margin-bottom: 20rpx;
+}
+
+.storage-progress {
+  height: 8rpx;
+  background: var(--background-color);
+  border-radius: 4rpx;
+  overflow: hidden;
+  margin-bottom: 10rpx;
+}
+
+.progress-bar {
+  height: 100%;
+  background: var(--primary-color);
+  transition: width 0.3s;
+}
+
+.storage-text {
+  font-size: 24rpx;
+  color: var(--text-color-light);
+}
+
+.clear-cache {
+  display: flex;
+  align-items: center;
+}
+
+.cache-size {
+  font-size: 24rpx;
+  color: var(--text-color-light);
+  margin-right: 10rpx;
+}
+
+/* 版本信息 */
+.version-info {
+  display: flex;
+  align-items: center;
+}
+
+.version {
+  font-size: 24rpx;
+  color: var(--text-color-light);
+  margin-right: 10rpx;
+}
+
+.arrow-icon {
+  width: 32rpx;
+  height: 32rpx;
+  opacity: 0.3;
+}
+
+/* 退出登录按钮 */
+.logout-btn {
+  margin: 60rpx 30rpx;
+  height: 88rpx;
+  line-height: 88rpx;
+  text-align: center;
+  background: var(--primary-color);
+  color: #fff;
+  border-radius: 44rpx;
+  font-size: 32rpx;
+} 

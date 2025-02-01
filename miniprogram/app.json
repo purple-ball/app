@@ -3,7 +3,12 @@
     "pages/index/index",
     "pages/cycle/cycle",
     "pages/community/community",
-    "pages/profile/profile"
+    "pages/profile/profile",
+    "pages/profile/settings",
+    "pages/profile/editProfile",
+    "pages/profile/notifications",
+    "pages/profile/favorites",
+    "pages/profile/about"
   ],
   "window": {
     "backgroundTextStyle": "light",

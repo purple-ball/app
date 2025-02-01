@@ -1,0 +1,82 @@
+<!--pages/profile/editProfile.wxml-->
+<view class="container">
+  <!-- 头像编辑 -->
+  <view class="avatar-section card">
+    <text class="section-title">头像</text>
+    <view class="avatar-wrapper" bindtap="chooseAvatar">
+      <image class="avatar" src="{{userInfo.avatarUrl || '/images/default-avatar.png'}}" mode="aspectFill"></image>
+      <view class="edit-mask">
+        <image class="edit-icon" src="/images/icons/camera.svg"></image>
+      </view>
+    </view>
+  </view>
+
+  <!-- 基本信息编辑 -->
+  <view class="info-section card">
+    <text class="section-title">基本信息</text>
+    <view class="form-item">
+      <text class="label">昵称</text>
+      <input 
+        class="input" 
+        value="{{userInfo.nickName}}" 
+        placeholder="请输入昵称"
+        bindinput="updateNickName"
+      />
+    </view>
+    <view class="form-item">
+      <text class="label">性别</text>
+      <picker 
+        bindchange="updateGender" 
+        value="{{userInfo.gender}}" 
+        range="{{genderOptions}}"
+      >
+        <view class="picker">
+          {{genderOptions[userInfo.gender]}}
+          <image class="arrow-icon" src="/images/icons/arrow_right.svg"></image>
+        </view>
+      </picker>
+    </view>
+    <view class="form-item">
+      <text class="label">生日</text>
+      <picker 
+        mode="date" 
+        value="{{userInfo.birthday}}" 
+        start="1960-01-01" 
+        end="2010-12-31" 
+        bindchange="updateBirthday"
+      >
+        <view class="picker">
+          {{userInfo.birthday || '请选择生日'}}
+          <image class="arrow-icon" src="/images/icons/arrow_right.svg"></image>
+        </view>
+      </picker>
+    </view>
+  </view>
+
+  <!-- 个人简介编辑 -->
+  <view class="bio-section card">
+    <text class="section-title">个人简介</text>
+    <textarea 
+      class="bio-input" 
+      value="{{userInfo.bio}}" 
+      placeholder="介绍一下自己吧..."
+      maxlength="200"
+      bindinput="updateBio"
+    ></textarea>
+    <view class="word-count">{{userInfo.bio.length || 0}}/200</view>
+  </view>
+
+  <!-- 隐私设置 -->
+  <view class="privacy-section card">
+    <text class="section-title">隐私设置</text>
+    <view class="form-item">
+      <text class="label">公开个人信息</text>
+      <switch checked="{{userInfo.isPublic}}" bindchange="togglePublic"></switch>
+    </view>
+  </view>
+
+  <!-- 保存按钮 -->
+  <view class="btn-wrapper">
+    <button class="save-btn" bindtap="saveProfile">保存</button>
+  </view>
+</view> 
