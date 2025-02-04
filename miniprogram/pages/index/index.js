@@ -1,38 +1,97 @@
 const app = getApp()
 
+// 女性主义名言数据
+const feministQuotes = [
+  {
+    content: "我们不是生来就是女人，而是成为女人。",
+    author: "西蒙·波伏娃"
+  },
+  {
+    content: "没有限制我们的高度，只有限制我们想象力的天空。",
+    author: "玛丽·沃斯通克拉夫特"
+  },
+  {
+    content: "一个女人要像一杯茶，安静中带着骨气。",
+    author: "张爱玲"
+  },
+  {
+    content: "女性的价值不应由他人来定义，而应由自己来书写。",
+    author: "弗吉尼亚·伍尔夫"
+  },
+  {
+    content: "教育女孩，就是教育整个民族。",
+    author: "艾玛·沃森"
+  }
+]
+
+// 信物奖励数据
+const rewards = [
+  {
+    id: 'white_carnation',
+    name: '白色康乃馨',
+    image: '/images/rewards/white_carnation.png',
+    description: '象征着纯洁的爱与平等。这朵花代表着对所有女性的尊重与关爱。'
+  },
+  {
+    id: 'violet',
+    name: '紫罗兰',
+    image: '/images/rewards/violet.png',
+    description: '代表着谦逊与坚韧。这是一朵象征女性力量的花，静默绽放却永不言弃。'
+  },
+  {
+    id: 'rose',
+    name: '玫瑰',
+    image: '/images/rewards/rose.png',
+    description: '象征着热情与自由。每一片花瓣都诉说着对自由与权利的渴望。'
+  },
+  {
+    id: 'lavender',
+    name: '薰衣草',
+    image: '/images/rewards/lavender.png',
+    description: '代表着优雅与独立。散发着淡雅芬芳，却有着不屈的生命力。'
+  },
+  {
+    id: 'ceiba',
+    name: '木棉花',
+    image: '/images/rewards/ceiba.png',
+    description: '象征着勇气与坚强。高耸入云，不畏风雨，是女性精神的完美写照。'
+  },
+  {
+    id: 'camellia',
+    name: '山茶花',
+    image: '/images/rewards/camellia.png',
+    description: '代表着坚持与绽放。在寒冷中依然绽放，展现出女性的坚韧之美。'
+  }
+]
+
 Page({
   data: {
     userInfo: null,
     cycleData: null,
     tasks: [
-      {
-        id: 1,
-        text: '记录今日情绪',
-        points: 5,
-        completed: false
-      },
-      {
-        id: 2,
-        text: '完成每日冥想',
-        points: 10,
-        completed: false
-      },
-      {
-        id: 3,
-        text: '阅读健康知识',
-        points: 8,
-        completed: false
-      }
+      { id: 1, text: '记录今日心情', completed: false, points: 5 },
+      { id: 2, text: '完成一次冥想', completed: false, points: 10 },
+      { id: 3, text: '阅读一篇文章', completed: false, points: 8 },
+      { id: 4, text: '记录生理状况', completed: false, points: 5 }
     ],
     reminder: null,
-    posts: []
+    posts: [],
+    quote: feministQuotes[0],
+    showReward: false,
+    currentReward: null
   },
 
-  onLoad: function () {
-    this.setData({
-      userInfo: app.globalData.userInfo
-    })
-    
+  onLoad() {
+    // 获取用户信息
+    const userInfo = wx.getStorageSync('userInfo')
+    if (userInfo) {
+      this.setData({ userInfo })
+    }
+
+    // 随机选择一条名言
+    const randomQuote = feministQuotes[Math.floor(Math.random() * feministQuotes.length)]
+    this.setData({ quote: randomQuote })
+
     // 获取周期数据
     this.getCycleData()
     
@@ -141,16 +200,70 @@ Page({
     this.setData({ reminder })
   },
 
-  // 切换任务完成状态
-  toggleTask: function (e) {
+  // 切换任务状态
+  toggleTask(e) {
     const taskId = e.currentTarget.dataset.id
     const tasks = this.data.tasks.map(task => {
       if (task.id === taskId) {
-        return { ...task, completed: !task.completed }
+        const completed = !task.completed
+        // 如果任务完成，随机给予奖励
+        if (completed) {
+          this.giveRandomReward()
+        }
+        return { ...task, completed }
       }
       return task
     })
+
     this.setData({ tasks })
+  },
+
+  // 随机发放奖励
+  giveRandomReward() {
+    const randomReward = rewards[Math.floor(Math.random() * rewards.length)]
+    this.setData({
+      currentReward: randomReward,
+      showReward: true
+    })
+  },
+
+  // 关闭奖励弹窗
+  closeReward() {
+    this.setData({
+      showReward: false
+    })
+  },
+
+  // 查看奖励详情
+  viewRewardDetail() {
+    const { currentReward } = this.data
+    wx.navigateTo({
+      url: `/pages/reward/detail?id=${currentReward.id}`
+    })
+  },
+
+  // 导航到个人页面
+  navigateToProfile() {
+    wx.navigateTo({
+      url: '/pages/profile/profile'
+    })
+  },
+
+  // 处理快捷功能点击
+  handleGridItemTap(e) {
+    const type = e.currentTarget.dataset.type
+    const routes = {
+      diary: '/pages/diary/index',
+      record: '/pages/record/index',
+      knowledge: '/pages/knowledge/index',
+      sos: '/pages/sos/index'
+    }
+
+    if (routes[type]) {
+      wx.navigateTo({
+        url: routes[type]
+      })
+    }
   },
 
   // 处理提醒

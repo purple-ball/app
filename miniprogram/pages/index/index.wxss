@@ -1,67 +1,67 @@
-/* 头部用户信息 */
-.header {
-  margin-bottom: 30rpx;
+/* 头像区域 */
+.avatar-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 60rpx 0;
 }
 
 .avatar {
-  width: 100rpx;
-  height: 100rpx;
+  width: 160rpx;
+  height: 160rpx;
   border-radius: 50%;
-  margin-right: 20rpx;
-}
-
-.user-text {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-.nickname {
-  font-size: 32rpx;
-  font-weight: bold;
-  margin-bottom: 6rpx;
+  border: 6rpx solid var(--primary-color);
+  margin-bottom: 20rpx;
 }
 
 .welcome {
-  font-size: 26rpx;
-  color: var(--text-color-light);
-}
-
-.cycle-status {
-  text-align: right;
-}
-
-.day-count {
-  display: block;
-  font-size: 24rpx;
-  color: var(--text-color-light);
-  margin-top: 6rpx;
+  font-size: 32rpx;
+  color: var(--primary-color);
 }
 
 /* 快捷功能区 */
 .grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 20rpx;
-  margin-top: 20rpx;
+  gap: 30rpx;
+  margin-top: 30rpx;
 }
 
 .grid-item {
   display: flex;
   flex-direction: column;
   align-items: center;
+  background: none;
   padding: 20rpx;
+  border: none;
+  border-radius: 16rpx;
+  transition: all 0.3s ease;
+}
+
+.grid-item::after {
+  display: none;
+}
+
+.grid-item:active {
+  transform: scale(0.95);
+  background: var(--background-color);
 }
 
 .grid-icon {
   width: 80rpx;
   height: 80rpx;
-  margin-bottom: 10rpx;
+  margin-bottom: 16rpx;
+}
+
+.grid-text {
+  font-size: 26rpx;
+  color: var(--text-color);
+  white-space: nowrap;
 }
 
 /* 每日任务 */
 .task-list {
-  margin-top: 20rpx;
+  margin-top: 30rpx;
 }
 
 .task-item {
@@ -75,6 +75,7 @@
 
 .task-text {
   margin-left: 20rpx;
+  transition: all 0.3s ease;
 }
 
 .task-text.completed {
@@ -85,6 +86,104 @@
 .task-points {
   color: var(--primary-color);
   font-weight: bold;
+}
+
+/* 名人名言卡片 */
+.quote-card {
+  text-align: center;
+  padding: 40rpx;
+}
+
+.quote-content {
+  font-size: 32rpx;
+  color: var(--primary-color);
+  line-height: 1.6;
+  margin-bottom: 20rpx;
+  font-style: italic;
+}
+
+.quote-author {
+  font-size: 28rpx;
+  color: var(--text-color-light);
+}
+
+/* 信物奖励弹窗 */
+.reward-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1000;
+  visibility: hidden;
+}
+
+.reward-modal.show {
+  visibility: visible;
+}
+
+.modal-mask {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.reward-modal.show .modal-mask {
+  opacity: 1;
+}
+
+.modal-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.8);
+  width: 600rpx;
+  background: #fff;
+  border-radius: 24rpx;
+  padding: 40rpx;
+  text-align: center;
+  opacity: 0;
+  transition: all 0.3s;
+}
+
+.reward-modal.show .modal-content {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.reward-title {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: var(--primary-color);
+  margin-bottom: 30rpx;
+}
+
+.reward-image {
+  width: 200rpx;
+  height: 200rpx;
+  margin-bottom: 20rpx;
+}
+
+.reward-name {
+  font-size: 32rpx;
+  color: var(--text-color);
+  margin-bottom: 40rpx;
+  display: block;
+}
+
+.reward-actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 20rpx;
+}
+
+.reward-actions .btn {
+  flex: 1;
 }
 
 /* 健康提醒 */

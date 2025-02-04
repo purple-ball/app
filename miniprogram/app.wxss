@@ -1,11 +1,18 @@
 /**app.wxss**/
 page {
-  --primary-color: #FF69B4;
-  --secondary-color: #FFB6C1;
-  --background-color: #FFF0F5;
+  /* 主色调 */
+  --primary-color: #8b75a6;  /* 主紫色 */
+  --secondary-color: #758e61; /* 主绿色 */
+  --accent-color: #c9ade4;   /* 浅紫色 */
+  --success-color: #698e6a;  /* 深绿色 */
+  --highlight-color: #bba1cb; /* 淡紫色 */
+  --active-color: #4f794a;    /* 暗绿色 */
+  
+  /* 中性色 */
+  --background-color: #f8f6fa; /* 浅紫背景 */
   --text-color: #333333;
   --text-color-light: #666666;
-  --border-color: #EEEEEE;
+  --border-color: #e8e6ea;
   
   background-color: var(--background-color);
   font-size: 28rpx;
@@ -25,7 +32,7 @@ page {
   border-radius: 16rpx;
   padding: 30rpx;
   margin-bottom: 20rpx;
-  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.05);
+  box-shadow: 0 2rpx 10rpx rgba(139, 117, 166, 0.1);
 }
 
 /* 按钮样式 */
@@ -37,6 +44,11 @@ page {
   font-size: 30rpx;
   border: none;
   text-align: center;
+  transition: all 0.3s ease;
+}
+
+.btn:active {
+  background: var(--accent-color);
 }
 
 .btn-outline {
@@ -45,11 +57,16 @@ page {
   border: 2rpx solid var(--primary-color);
 }
 
+.btn-success {
+  background: var(--success-color);
+}
+
 /* 文本样式 */
 .title {
   font-size: 36rpx;
   font-weight: bold;
   margin-bottom: 20rpx;
+  color: var(--primary-color);
 }
 
 .subtitle {
@@ -76,6 +93,11 @@ page {
   border-radius: 8rpx;
   padding: 0 20rpx;
   box-sizing: border-box;
+  transition: border-color 0.3s ease;
+}
+
+.form-input:focus {
+  border-color: var(--primary-color);
 }
 
 /* 分割线 */
@@ -111,6 +133,20 @@ page {
 .flex-column {
   display: flex;
   flex-direction: column;
+}
+
+/* 标签样式 */
+.tag {
+  padding: 6rpx 16rpx;
+  border-radius: 20rpx;
+  font-size: 24rpx;
+  background: var(--accent-color);
+  color: #fff;
+}
+
+/* 渐变背景 */
+.gradient-bg {
+  background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
 }
 
 /* 安全区适配 */
