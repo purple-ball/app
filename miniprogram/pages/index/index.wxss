@@ -64,7 +64,28 @@
   margin-top: 30rpx;
 }
 
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20rpx;
+}
+
+.task-actions {
+  display: flex;
+  gap: 20rpx;
+}
+
+.action-icon {
+  width: 40rpx;
+  height: 40rpx;
+  opacity: 0.6;
+}
+
 .task-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   padding: 20rpx 0;
   border-bottom: 2rpx solid var(--border-color);
 }
@@ -73,9 +94,16 @@
   border-bottom: none;
 }
 
+.task-content {
+  display: flex;
+  align-items: center;
+  flex: 1;
+}
+
 .task-text {
   margin-left: 20rpx;
   transition: all 0.3s ease;
+  flex: 1;
 }
 
 .task-text.completed {
@@ -86,6 +114,108 @@
 .task-points {
   color: var(--primary-color);
   font-weight: bold;
+  margin-left: 20rpx;
+}
+
+.item-actions {
+  display: flex;
+  gap: 20rpx;
+}
+
+/* 任务编辑弹窗 */
+.task-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1000;
+  visibility: hidden;
+}
+
+.task-modal.show {
+  visibility: visible;
+}
+
+.modal-mask {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.task-modal.show .modal-mask {
+  opacity: 1;
+}
+
+.modal-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.8);
+  width: 600rpx;
+  background: #fff;
+  border-radius: 24rpx;
+  padding: 40rpx;
+  opacity: 0;
+  transition: all 0.3s;
+}
+
+.task-modal.show .modal-content {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30rpx;
+}
+
+.modal-header .title {
+  font-size: 32rpx;
+  font-weight: bold;
+}
+
+.close-icon {
+  width: 40rpx;
+  height: 40rpx;
+  opacity: 0.6;
+}
+
+.form-item {
+  margin-bottom: 30rpx;
+}
+
+.form-item .label {
+  display: block;
+  margin-bottom: 10rpx;
+  color: var(--text-color-light);
+}
+
+.form-item .input {
+  width: 100%;
+  height: 80rpx;
+  border: 2rpx solid var(--border-color);
+  border-radius: 8rpx;
+  padding: 0 20rpx;
+  box-sizing: border-box;
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 20rpx;
+  margin-top: 40rpx;
+}
+
+.modal-footer .btn {
+  flex: 1;
 }
 
 /* 名人名言卡片 */

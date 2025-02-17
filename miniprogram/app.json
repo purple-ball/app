@@ -8,7 +8,8 @@
     "pages/profile/editProfile",
     "pages/profile/notifications",
     "pages/profile/favorites",
-    "pages/profile/about"
+    "pages/profile/about",
+    "pages/reward/detail"
   ],
   "window": {
     "backgroundTextStyle": "light",

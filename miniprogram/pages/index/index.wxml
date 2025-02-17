@@ -27,11 +27,42 @@
 
   <!-- 每日任务 -->
   <view class="task-list">
-    <view class="section-title">每日任务</view>
+    <view class="section-header">
+      <text class="section-title">每日任务</text>
+      <view class="task-actions">
+        <image class="action-icon" src="/images/icons/edit.png" bindtap="showTaskModal" data-mode="add"></image>
+      </view>
+    </view>
     <view class="task-item" wx:for="{{tasks}}" wx:key="id">
-      <checkbox checked="{{item.completed}}" bindtap="toggleTask" data-id="{{item.id}}" />
-      <text class="task-text {{item.completed ? 'completed' : ''}}">{{item.text}}</text>
-      <text class="task-points">+{{item.points}}</text>
+      <view class="task-content">
+        <checkbox checked="{{item.completed}}" bindtap="toggleTask" data-id="{{item.id}}" />
+        <text class="task-text {{item.completed ? 'completed' : ''}}">{{item.text}}</text>
+      </view>
+      <view class="item-actions">
+        <image class="action-icon" src="/images/icons/edit.png" bindtap="showTaskModal" data-mode="edit" data-task="{{item}}"></image>
+        <image class="action-icon" src="/images/icons/trash.svg" bindtap="deleteTask" data-id="{{item.id}}"></image>
+      </view>
+    </view>
+  </view>
+
+  <!-- 任务编辑弹窗 -->
+  <view class="task-modal {{showTaskModal ? 'show' : ''}}">
+    <view class="modal-mask" bindtap="hideTaskModal"></view>
+    <view class="modal-content">
+      <view class="modal-header">
+        <text class="title">{{editMode === 'add' ? '添加任务' : '编辑任务'}}</text>
+        <image class="close-icon" src="/images/icons/close.png" bindtap="hideTaskModal"></image>
+      </view>
+      <view class="modal-body">
+        <view class="form-item">
+          <text class="label">任务内容</text>
+          <input class="input" value="{{editingTask.text}}" placeholder="请输入任务内容" bindinput="updateTaskText"/>
+        </view>
+      </view>
+      <view class="modal-footer">
+        <button class="btn btn-secondary" bindtap="hideTaskModal">取消</button>
+        <button class="btn btn-primary" bindtap="saveTask">确定</button>
+      </view>
     </view>
   </view>
 

@@ -1,2 +1,24 @@
 <!--pages/reward/detail.wxml-->
-<text>pages/reward/detail.wxml</text>
+<view class="container">
+  <view class="reward-card">
+    <!-- 信物图片 -->
+    <image class="reward-image" src="{{reward.image}}" mode="aspectFit"></image>
+    
+    <!-- 信物名称 -->
+    <text class="reward-name">{{reward.name}}</text>
+    
+    <!-- 信物描述 -->
+    <view class="reward-description">
+      <text>{{reward.description}}</text>
+    </view>
+    
+    <!-- 获得时间 -->
+    <view class="reward-time">
+      <text class="label">获得时间</text>
+      <text class="value">{{reward.obtainTime || '刚刚'}}</text>
+    </view>
+  </view>
+  
+  <!-- 分享按钮 -->
+  <button class="share-btn" open-type="share">分享给好友</button>
+</view> 

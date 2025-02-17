@@ -69,16 +69,22 @@ Page({
     userInfo: null,
     cycleData: null,
     tasks: [
-      { id: 1, text: '记录今日心情', completed: false, points: 5 },
-      { id: 2, text: '完成一次冥想', completed: false, points: 10 },
-      { id: 3, text: '阅读一篇文章', completed: false, points: 8 },
-      { id: 4, text: '记录生理状况', completed: false, points: 5 }
+      { id: 1, text: '记录今日心情', completed: false },
+      { id: 2, text: '完成一次冥想', completed: false },
+      { id: 3, text: '阅读一篇文章', completed: false },
+      { id: 4, text: '记录生理状况', completed: false }
     ],
     reminder: null,
     posts: [],
     quote: feministQuotes[0],
     showReward: false,
-    currentReward: null
+    currentReward: null,
+    showTaskModal: false,
+    editMode: 'add', // 'add' 或 'edit'
+    editingTask: {
+      id: null,
+      text: ''
+    }
   },
 
   onLoad() {
@@ -293,5 +299,101 @@ Page({
       title: 'HerSpace - 你的贴心女性健康助手',
       path: '/pages/index/index'
     }
+  },
+
+  // 显示任务编辑弹窗
+  showTaskModal: function(e) {
+    const mode = e.currentTarget.dataset.mode
+    if (mode === 'edit') {
+      const task = e.currentTarget.dataset.task
+      this.setData({
+        editMode: 'edit',
+        editingTask: { ...task }
+      })
+    } else {
+      this.setData({
+        editMode: 'add',
+        editingTask: {
+          id: null,
+          text: ''
+        }
+      })
+    }
+    this.setData({ showTaskModal: true })
+  },
+
+  // 隐藏任务编辑弹窗
+  hideTaskModal: function() {
+    this.setData({ showTaskModal: false })
+  },
+
+  // 更新任务内容
+  updateTaskText: function(e) {
+    this.setData({
+      'editingTask.text': e.detail.value
+    })
+  },
+
+  // 保存任务
+  saveTask: function() {
+    const { editingTask, editMode, tasks } = this.data
+    
+    if (!editingTask.text) {
+      wx.showToast({
+        title: '请输入任务内容',
+        icon: 'none'
+      })
+      return
+    }
+
+    let newTasks = [...tasks]
+    
+    if (editMode === 'add') {
+      // 生成新的任务ID
+      const maxId = Math.max(...tasks.map(t => t.id), 0)
+      editingTask.id = maxId + 1
+      editingTask.completed = false
+      newTasks.push(editingTask)
+    } else {
+      // 更新已有任务
+      const index = tasks.findIndex(t => t.id === editingTask.id)
+      if (index !== -1) {
+        newTasks[index] = {
+          ...tasks[index],
+          text: editingTask.text
+        }
+      }
+    }
+
+    this.setData({
+      tasks: newTasks,
+      showTaskModal: false
+    })
+
+    wx.showToast({
+      title: editMode === 'add' ? '添加成功' : '更新成功',
+      icon: 'success'
+    })
+  },
+
+  // 删除任务
+  deleteTask: function(e) {
+    const taskId = e.currentTarget.dataset.id
+    
+    wx.showModal({
+      title: '删除任务',
+      content: '确定要删除这个任务吗？',
+      success: res => {
+        if (res.confirm) {
+          const newTasks = this.data.tasks.filter(t => t.id !== taskId)
+          this.setData({ tasks: newTasks })
+          
+          wx.showToast({
+            title: '删除成功',
+            icon: 'success'
+          })
+        }
+      }
+    })
   }
 }) 
